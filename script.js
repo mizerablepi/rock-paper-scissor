@@ -9,13 +9,6 @@ function getComputerChoice() {
   }
 }
 
-function isValidOption(choice) {
-  if (choice.toLowerCase() == 'rock' || choice.toLowerCase() == 'paper' || choice.toLowerCase() == 'scissor') {
-    return true; 
-  }
-  return false;
-}
-
 function playRound(computerChoice, playerChoice) {
   playerChoice = playerChoice.toLowerCase();
   
@@ -46,11 +39,6 @@ function game() {
   let playerScore = 0;
   let computerScore = 0;
   for (i = 0; i < 5; i++){
-    const playerChoice = prompt('enter your choice');
-    if (!isValidOption(playerChoice)) {
-      console.log("i don't play with people that can't type");
-      return;
-    }
     const computerChoice = getComputerChoice();
     result = playRound(computerChoice, playerChoice);
     playerScore += result;
