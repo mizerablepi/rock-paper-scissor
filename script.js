@@ -51,22 +51,24 @@ function playRound(computerChoice, playerChoice) {
 function game(playerChoice) {
   const computerChoice = getComputerChoice();
   result = playRound(computerChoice, playerChoice);
-  playerScore += result;
-  totalRounds++;
+  
+  if (result == 1) {
+    roundResultSpace.textContent = `You win! Player(${playerChoice}) beats Computer(${computerChoice})`;
+    totalRounds++;
+  } else if (result == 0) {
+    roundResultSpace.textContent = `You Lose! Computer(${computerChoice}) beats Player(${playerChoice})`;
+    totalRounds++;
+  } else {
+    roundResultSpace.textContent = 'draw!';
+  }
+
+  playerScore += Math.floor(result);
   computerScore = totalRounds - playerScore;
 
   pscore.textContent = playerScore;
   cscore.textContent = computerScore;
 
-  if (result == 1) {
-    roundResultSpace.textContent = `You win! Player(${playerChoice}) beats Computer(${computerChoice})`;
-  } else if (result == 0) {
-    roundResultSpace.textContent = `You Lose! Computer(${computerChoice}) beats Player(${playerChoice})`;
-  } else {
-    roundResultSpace.textContent = 'draw!';
-  }
-
-  if (totalRounds == 3) {
+  if (playerScore == 5 || computerScore == 5) {
     printWinner(playerScore, computerScore);
   } else {
     matchResultSpace.textContent = ' ';    
