@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="header"> Rock-Paper-Scissor </div>
+    <div class="container">
+      <div class="score">
+        Your Score:<br><br>
+        <span id="pscore">0</span>
+      </div>
+      <div class="weapon-box">
+        <div id="title">Choose your weapon!</div>
+        <div id="subtitle">Best of 3 rounds</div>
+        <div id="weapons-select">
+          <button class="weapon" id="rock">Rock</button>
+          <button class="weapon" id="paper">Paper</button>
+          <button class="weapon" id="scissor">Scissor</button>
+        </div>
+      </div>
+      <div class="score">
+        Computer's Score:<br><br>
+        <span id="cscore">0</span>
+      </div>
+    </div>
+    <div class="fight-result">
+      <div id="round-result"> </div>
+      <div id="match-result"> </div>
+    </div>
+    <div class ="footer">
+      Check out the code : <a href="https://www.github.com/mizerablepi/rock-paper-scissor"> here</a>
+    </div>
   </body>
 </html>

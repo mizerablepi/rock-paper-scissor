@@ -1,3 +1,16 @@
+let playerScore = 0;
+let computerScore = 0;
+let totalRounds = 0;
+
+pscore = document.getElementById('pscore');
+cscore = document.getElementById('cscore');
+roundResultSpace = document.getElementById('round-result');
+matchResultSpace = document.getElementById('match-result');
+selection = document.getElementById('weapons-select');
+
+selection.addEventListener('click', event => game(event.target.id));
+
+
 function getComputerChoice() {
   let num =Math.round(Math.random() * 100);
   if (num % 3 == 0) {
@@ -35,29 +48,44 @@ function playRound(computerChoice, playerChoice) {
   }
 }
 
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-  for (i = 0; i < 5; i++){
-    const computerChoice = getComputerChoice();
-    result = playRound(computerChoice, playerChoice);
-    playerScore += result;
-    if (result == 1) {
-      console.log(`You win! ${playerChoice} beats ${computerChoice}`);
-    } else if (result == 0) {
-      console.log(`You Lose! ${computerChoice} beats ${playerChoice}`);
-    } else {
-      console.log('draw!')
-    }
-  }
-  computerScore = 5 - playerScore;
-  if (playerScore > computerScore) {
-    console.log('player wins')
-  } else if (playerScore < computerScore) {
-    console.log('computer wins')
+function game(playerChoice) {
+  const computerChoice = getComputerChoice();
+  result = playRound(computerChoice, playerChoice);
+  playerScore += result;
+  totalRounds++;
+  computerScore = totalRounds - playerScore;
+
+  pscore.textContent = playerScore;
+  cscore.textContent = computerScore;
+
+  if (result == 1) {
+    roundResultSpace.textContent = `You win! Player(${playerChoice}) beats Computer(${computerChoice})`;
+  } else if (result == 0) {
+    roundResultSpace.textContent = `You Lose! Computer(${computerChoice}) beats Player(${playerChoice})`;
   } else {
-    console.log('draw! no one wins')
+    roundResultSpace.textContent = 'draw!';
+  }
+
+  if (totalRounds == 3) {
+    printWinner(playerScore, computerScore);
+  } else {
+    matchResultSpace.textContent = ' ';    
   }
 }
 
-game()
+function printWinner(pScore, cScore) {
+  if (pScore > cScore) {
+    matchResultSpace.style.color = 'green';
+    matchResultSpace.textContent = 'player wins';
+  } else if (pScore < cScore) {
+    matchResultSpace.style.color = 'red';
+    matchResultSpace.textContent = 'computer wins';
+  } else {
+    matchResultSpace.style.color = 'yellow';
+    matchResultSpace.textContent = 'draw! no one wins';
+  }
+  playerScore = 0;
+  computerScore = 0;
+  totalRounds = 0;
+}
+
